@@ -1,3 +1,6 @@
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
+
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Avatar from "@mui/material/Avatar";
@@ -10,6 +13,12 @@ import Logo from "../../assets/logo.png";
 import classes from "./Auth.module.css";
 
 const Signup = (props) => {
+  const dispatch = useDispatch();
+
+  const toggleAuthFormHandler = () => {
+    dispatch(uiActions.toggleAuthForm());
+  };
+
   return (
     <Box
       sx={{
@@ -81,7 +90,7 @@ const Signup = (props) => {
         </Button>
         <Grid container justifyContent="flex-end">
           <Grid item>
-            <Link href="#" variant="body2">
+            <Link href="#" variant="body2" onClick={toggleAuthFormHandler}>
               Already have an account? Sign in
             </Link>
           </Grid>
