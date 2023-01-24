@@ -13,6 +13,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 const Footer = () => {
   return (
     <AppBar
+      component="footer"
       position="fixed"
       color="transparent"
       elevation={0}
@@ -23,7 +24,7 @@ const Footer = () => {
         sx={{
           flexDirection: { xs: "column", md: "row" },
           gap: 2,
-          p: 2,
+          py: 2,
           justifyContent: { md: "space-evenly" },
         }}
       >
