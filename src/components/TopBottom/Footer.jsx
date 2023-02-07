@@ -15,11 +15,11 @@ const Footer = () => {
     <AppBar
       component="footer"
       position="fixed"
-      color="transparent"
+      color="inherit"
       elevation={0}
       sx={{ top: "auto", bottom: 0 }}
     >
-      <Divider variant="middle" sx={{ ml: 4, mr: 4 }} />
+      <Divider variant="middle" sx={{ mx: 4, py: 1 }} />
       <Toolbar
         sx={{
           flexDirection: { xs: "column", md: "row" },
