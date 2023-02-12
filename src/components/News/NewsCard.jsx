@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -7,7 +8,9 @@ import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 
 import classes from "./NewsCard.module.css";
+import { useEffect } from "react";
 const NewsCard = () => {
+  const newsData = useSelector((state) => state.api.newsData);
   const items = [
     {
       category: "Sports",
@@ -94,30 +97,29 @@ const NewsCard = () => {
     };
   }
 
+  useEffect(() => {
+    console.log(newsData);
+  }, [newsData]);
+
   return (
     <main>
-      <ImageList
-        variant="quilted"
-        cols={4}
-        gap={8}
-        rowHeight={187}
-      >
-        {items.map((item) => (
+      <ImageList variant="quilted" cols={4} gap={8} rowHeight={187}>
+        {newsData.map((item) => (
           <ImageListItem
-            key={item.img}
+            key={item.urlToImage}
             cols={item.cols || 1}
             rows={item.rows || 1}
             width={282}
             sx={item.highBox && { position: "relative", bottom: 48, right: 0 }}
           >
             <img
-              {...srcset(item.img, 187, item.rows, item.cols)}
+              {...srcset(item.urlToImage, 187, item.rows, item.cols)}
               alt={item.title}
               loading="lazy"
             />
             <ImageListItemBar
               title={item.title}
-              subtitle={item.author}
+              subtitle={item.source.name}
               actionIcon={
                 <IconButton
                   sx={{ color: "#008037" }}
