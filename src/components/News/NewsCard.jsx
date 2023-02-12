@@ -98,7 +98,6 @@ const NewsCard = () => {
     <main>
       <ImageList
         variant="quilted"
-        // sx={{ height: 383 }}
         cols={4}
         gap={8}
         rowHeight={187}
