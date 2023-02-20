@@ -1,0 +1,27 @@
+.weatherComponent {
+  background-color: #0078d4;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 5px !important;
+}
+.container {
+  color: #f7f7f7;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem;
+}
+.temp {
+}
+
+.location {
+}
+
+.container img {
+  width: 75px;
+}
+
+.weather {
+}

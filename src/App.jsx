@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { fetchNewsData } from "./store/news-requests";
+
 import Auth from "./components/Auth/Auth";
 import Loading from "./components/UI/Loading";
 import WebAppBar from "./components/TopBottom/WebAppBar";
@@ -10,8 +13,6 @@ import NewsCard from "./components/News/NewsCard";
 import Container from "@mui/material/Container";
 import "./App.css";
 
-import { fetchNewsData } from "./store/news-requests";
-import { useEffect } from "react";
 function App() {
   const isLoading = useSelector((state) => state.ui.isLoading);
   const dispatch = useDispatch();

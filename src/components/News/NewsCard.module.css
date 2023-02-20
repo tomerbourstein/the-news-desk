@@ -1,3 +1,4 @@
-li img {
-    border-radius: 5px !important;
+li img,
+li div {
+  border-radius: 5px !important;
 }
