@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -7,89 +8,25 @@ import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 
 import classes from "./Headline.module.css";
 const Headline = () => {
-  const items = [
-    {
-      category: "Sports",
-      img: "https://i2-prod.liverpoolecho.co.uk/incoming/article25995235.ece/ALTERNATES/s458/0_GettyImages-1437548454.jpg",
-      title:
-        "Liverpool transfer news LIVE - Jude Bellingham plan, Moises Caicedo update, Sofyan Amrabat boost",
-      author: "LIVERPOOL FC",
-      cols: 12,
-      rows: 1,
-    },
-    {
-      category: "Sports",
-      img: "https://i2-prod.liverpoolecho.co.uk/incoming/article25995235.ece/ALTERNATES/s458/0_GettyImages-1437548454.jpg",
-      title:
-        "Liverpool transfer news LIVE - Jude Bellingham plan, Moises Caicedo update, Sofyan Amrabat boost",
-      author: "LIVERPOOL FC",
-      cols: 12,
-      rows: 1,
-    },
-    {
-      category: "Sports",
-      img: "https://i2-prod.liverpoolecho.co.uk/incoming/article25995235.ece/ALTERNATES/s458/0_GettyImages-1437548454.jpg",
-      title:
-        "Liverpool transfer news LIVE - Jude Bellingham plan, Moises Caicedo update, Sofyan Amrabat boost",
-      author: "LIVERPOOL FC",
-      cols: 12,
-      rows: 1,
-    },
-    {
-      category: "Sports",
-      img: "https://i2-prod.liverpoolecho.co.uk/incoming/article25995235.ece/ALTERNATES/s458/0_GettyImages-1437548454.jpg",
-      title:
-        "Liverpool transfer news LIVE - Jude Bellingham plan, Moises Caicedo update, Sofyan Amrabat boost",
-      author: "LIVERPOOL FC",
-      cols: 12,
-      rows: 1,
-    },
-    {
-      category: "Sports",
-      img: "https://i2-prod.liverpoolecho.co.uk/incoming/article25995235.ece/ALTERNATES/s458/0_GettyImages-1437548454.jpg",
-      title:
-        "Liverpool transfer news LIVE - Jude Bellingham plan, Moises Caicedo update, Sofyan Amrabat boost",
-      author: "LIVERPOOL FC",
-      cols: 12,
-      rows: 1,
-    },
-    {
-      category: "Sports",
-      img: "https://i2-prod.liverpoolecho.co.uk/incoming/article25995235.ece/ALTERNATES/s458/0_GettyImages-1437548454.jpg",
-      title:
-        "Liverpool transfer news LIVE - Jude Bellingham plan, Moises Caicedo update, Sofyan Amrabat boost",
-      author: "LIVERPOOL FC",
-      cols: 12,
-      rows: 1,
-    },
-    {
-      category: "Sports",
-      img: "https://i2-prod.liverpoolecho.co.uk/incoming/article25995235.ece/ALTERNATES/s458/0_GettyImages-1437548454.jpg",
-      title:
-        "Liverpool transfer news LIVE - Jude Bellingham plan, Moises Caicedo update, Sofyan Amrabat boost",
-      author: "LIVERPOOL FC",
-      cols: 12,
-      rows: 1,
-    },
-  ];
+  const newsData = useSelector((state) => state.api.newsData);
 
   return (
     <ImageList cols={1} gap={20} rowHeight="auto">
-      {items.map((item) => (
+      {newsData.map((item) => (
         <ImageListItem
-          key={item.img}
+          key={item.urlToImage}
           cols={item.cols || 1}
           rows={item.rows || 1}
         >
           <img
-            src={`${item.img}?w=248&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+            src={`${item.urlToImage}?w=248&h=192&fit=crop&auto=format`}
+            srcSet={`${item.urlToImage}?w=248&h=192&fit=crop&auto=format&dpr=2 2x`}
             alt={item.title}
             loading="lazy"
           />
           <ImageListItemBar
             title={item.title}
-            subtitle={item.author}
+            subtitle={item.source.name}
             actionIcon={
               <IconButton
                 sx={{ color: "#008037" }}
