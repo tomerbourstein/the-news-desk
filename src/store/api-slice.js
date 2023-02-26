@@ -5,7 +5,10 @@ const apiSlice = createSlice({
   initialState: { newsData: [], weatherData: [] },
   reducers: {
     fetchNewsData(state, action) {
-      state.newsData = action.payload;
+      if (state.newsData.length === 0) {
+        state.newsData = action.payload;
+      }
+      state.newsData.concat(action.payload);
     },
     fetchWeatherData(state, action) {
       state.weatherData = action.payload;

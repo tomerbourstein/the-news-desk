@@ -1,4 +1,6 @@
 import { apiActions } from "./api-slice";
+
+import NA from "../assets/not-available.jpg";
 const api = "a1de8b9cad7a634536975361a087ac97";
 
 export const fetchWeatherData = (lat, lon) => {
@@ -27,18 +29,20 @@ export const fetchWeatherData = (lat, lon) => {
     };
     try {
       const weatherData = await fetchData();
-      console.log(weatherData);
+      // console.log(weatherData);
       dispatch(apiActions.fetchWeatherData(weatherData));
     } catch (error) {
       console.log(error);
     }
   };
 };
+
+
 export const fetchNewsData = (category) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?category=${category}&pageSize=7&apiKey=ecd3c224f6434c6b81fa5efd08585869`
+        `https://newsapi.org/v2/top-headlines?category=${category}&country=gb&pageSize=2&apiKey=ecd3c224f6434c6b81fa5efd08585869`
       );
 
       const data = await response.json();
@@ -48,12 +52,16 @@ export const fetchNewsData = (category) => {
 
       for (const article of data.articles) {
         article.category = category;
+        if (!article.urlToImage) {
+          article.urlToImage = NA;
+        }
       }
 
       return data.articles;
     };
     try {
       const newsData = await fetchData();
+      console.log(newsData);
       dispatch(apiActions.fetchNewsData(newsData));
     } catch (error) {
       console.log(error);

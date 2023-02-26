@@ -18,7 +18,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const category = "sports";
+    const category = "music";
     dispatch(fetchNewsData(category));
   }, [dispatch]);
 

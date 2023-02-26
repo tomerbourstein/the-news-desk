@@ -2,3 +2,7 @@ li img,
 li div {
   border-radius: 5px !important;
 }
+
+.NA {
+  background-color: rgb(227, 227, 227);
+}

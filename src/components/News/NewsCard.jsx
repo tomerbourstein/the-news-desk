@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 
 import classes from "./NewsCard.module.css";
+
 const NewsCard = () => {
   const newsData = useSelector((state) => state.api.newsData);
 
@@ -32,40 +33,49 @@ const NewsCard = () => {
         <ImageListItem key="weather" cols={1} rows={1} width={282}>
           <Weather />
         </ImageListItem>
-        {newsData.map((item) => (
-          <ImageListItem
-            key={item.urlToImage}
-            cols={item.cols || 1}
-            rows={item.rows || 1}
-            width={282}
-            sx={item.highBox && { position: "relative", bottom: 48, right: 0 }}
-          >
-            <img
-              {...srcset(item.urlToImage, 187, item.rows, item.cols)}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={item.title}
-              subtitle={item.source.name}
-              actionIcon={
-                <IconButton
-                  sx={{ color: "#008037" }}
-                  aria-label={`read more about ${item.title}`}
-                >
-                  <ExpandCircleDownIcon className={classes.arrowIcon} />
-                </IconButton>
+        {newsData.map((item, index) => {
+          const NA =
+            item.urlToImage === "/src/assets/not-available.jpg"
+              ? classes.NA
+              : null;
+          return (
+            <ImageListItem
+              key={index}
+              cols={item.cols || 1}
+              rows={item.rows || 1}
+              width={282}
+              sx={
+                item.highBox && { position: "relative", bottom: 48, right: 0 }
               }
-              sx={{ mb: 1, backgroundColor: "2E2E2A0" }}
-            ></ImageListItemBar>
-            <Chip
-              label={item.category}
-              size="small"
-              color="success"
-              sx={{ position: "absolute", bottom: 68, zIndex: 2, m: 0.5 }}
-            />
-          </ImageListItem>
-        ))}
+            >
+              <img
+                {...srcset(item.urlToImage, 187, item.rows, item.cols)}
+                alt={item.title}
+                loading="lazy"
+                className={NA}
+              />
+              <ImageListItemBar
+                title={item.title}
+                subtitle={item.source.name}
+                actionIcon={
+                  <IconButton
+                    sx={{ color: "#008037" }}
+                    aria-label={`read more about ${item.title}`}
+                  >
+                    <ExpandCircleDownIcon className={classes.arrowIcon} />
+                  </IconButton>
+                }
+                sx={{ mb: 1, backgroundColor: "2E2E2A0" }}
+              ></ImageListItemBar>
+              <Chip
+                label={item.category}
+                size="small"
+                color="success"
+                sx={{ position: "absolute", bottom: 68, zIndex: 2, m: 0.5 }}
+              />
+            </ImageListItem>
+          );
+        })}
       </ImageList>
     </main>
   );
