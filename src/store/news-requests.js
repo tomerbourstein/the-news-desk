@@ -42,7 +42,9 @@ export const fetchNewsData = (category) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `https://newsapi.org/v2/top-headlines?category=${category}&pageSize=7&apiKey=ecd3c224f6434c6b81fa5efd08585869`
+        `
+        https://newsapi.org/v2/everything?q=apple&from=2023-02-26&to=2023-02-26&sortBy=popularity&apiKey=ecd3c224f6434c6b81fa5efd08585869`
+        // `https://newsapi.org/v2/top-headlines?category=${category}&pageSize=7&apiKey=ecd3c224f6434c6b81fa5efd08585869`
       );
 
       const data = await response.json();
