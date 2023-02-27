@@ -17,9 +17,9 @@ const NewsCard = () => {
     return {
       src: { image },
       // `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      srcSet: `${image}?w=${size * cols}&h=${
-        size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
+      // srcSet: `${image}?w=${size * cols}&h=${
+      //   size * rows
+      // }&fit=crop&auto=format&dpr=2 2x`,
     };
   }
 
@@ -49,7 +49,8 @@ const NewsCard = () => {
               }
             >
               <img
-                {...srcset(item.urlToImage, 187, item.rows, item.cols)}
+              src={item.urlToImage}
+                // {...srcset(item.urlToImage, 187, item.rows, item.cols)}
                 alt={item.title}
                 loading="lazy"
                 className={NA}
