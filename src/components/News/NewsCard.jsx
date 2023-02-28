@@ -49,7 +49,7 @@ const NewsCard = () => {
               }
             >
               <img
-              src={item.urlToImage}
+                src={item.urlToImage}
                 // {...srcset(item.urlToImage, 187, item.rows, item.cols)}
                 alt={item.title}
                 loading="lazy"

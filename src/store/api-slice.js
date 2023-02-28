@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { chooseRandomItems } from "../utils/index";
 
 const apiSlice = createSlice({
   name: "api",
-  initialState: { newsData: [], weatherData: [] },
+  initialState: { newsData: [], weatherData: [], categories: [] },
   reducers: {
     fetchNewsData(state, action) {
       if (state.newsData.length === 0) {
@@ -12,6 +13,9 @@ const apiSlice = createSlice({
     },
     fetchWeatherData(state, action) {
       state.weatherData = action.payload;
+    },
+    fetchNewsCategoriesData(state, action) {
+      state.categories = chooseRandomItems(action.payload);
     },
   },
 });
