@@ -8,5 +8,5 @@ export function showPosition(position) {
 
 export function chooseRandomItems(array) {
   const shuffledArray = array.sort(() => Math.random() - 0.5);
-  return shuffledArray.slice(0, 10);
+  return shuffledArray.slice(0, 15);
 }

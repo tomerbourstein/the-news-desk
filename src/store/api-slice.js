@@ -17,6 +17,10 @@ const apiSlice = createSlice({
     fetchNewsCategoriesData(state, action) {
       state.categories = chooseRandomItems(action.payload);
     },
+    updateCategories(state, action) {
+      const newArr = state.categories.filter((e) => e.name != action.payload);
+      state.categories = newArr;
+    },
   },
 });
 
