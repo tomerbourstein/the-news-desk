@@ -37,12 +37,12 @@ export const fetchWeatherData = (lat, lon) => {
   };
 };
 
-export const fetchNewsData = (category) => {
+export const fetchNewsData = (q, initial) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        `https://newsapi.org/v2/everything?q=apple&from=2023-02-26&to=2023-02-26&sortBy=popularity&pageSize=7&apiKey=${newsAPI}`
-        // `https://newsapi.org/v2/top-headlines?category=${category}&pageSize=7&apiKey=${newsAPI}`
+        // `https://newsapi.org/v2/everything?q=apple&from=2023-02-26&to=2023-02-26&sortBy=popularity&pageSize=7&apiKey=${newsAPI}`
+        `https://newsapi.org/v2/everything?q=${q}&pageSize=2&apiKey=${newsAPI}`
       );
 
       const data = await response.json();
@@ -51,18 +51,23 @@ export const fetchNewsData = (category) => {
       }
 
       for (const article of data.articles) {
-        article.category = category;
+        article.category = q;
         if (!article.urlToImage) {
           article.urlToImage = NA;
         }
       }
-
+      // console.log(data);
       return data.articles;
     };
     try {
       const newsData = await fetchData();
       console.log(newsData);
-      dispatch(apiActions.fetchNewsData(newsData));
+      if (initial) {
+        dispatch(apiActions.fetchNewsData(newsData));
+      }
+      if (!initial) {
+        dispatch(apiActions.fetchNewsWithNewPreferences(newsData));
+      }
     } catch (error) {
       console.log(error);
     }

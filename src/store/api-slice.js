@@ -9,13 +9,21 @@ const apiSlice = createSlice({
       if (state.newsData.length === 0) {
         state.newsData = action.payload;
       }
-      state.newsData.concat(action.payload);
     },
+    fetchNewsWithNewPreferences(state, action) {
+      const newList = state.newsData.concat(action.payload);
+      const maxSevenItemsList = chooseRandomItems(newList, 7);
+      state.newsData = maxSevenItemsList;
+    },
+    clearNewsData(state) {
+      state.newsData = [];
+    },
+
     fetchWeatherData(state, action) {
       state.weatherData = action.payload;
     },
     fetchNewsCategoriesData(state, action) {
-      state.categories = chooseRandomItems(action.payload);
+      state.categories = chooseRandomItems(action.payload, 15);
     },
     updateCategories(state, action) {
       const newArr = state.categories.filter((e) => e.name != action.payload);

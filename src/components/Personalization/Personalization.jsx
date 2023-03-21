@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchNewsCategoriesData } from "../../store/news-requests";
 import { apiActions } from "../../store/api-slice";
+import {
+  fetchNewsCategoriesData,
+  fetchNewsData,
+} from "../../store/news-requests";
 import Popover from "@mui/material/Popover";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -29,8 +32,18 @@ const Personalization = (props) => {
     const newArray = clickedCategory.filter((item) => item != categoryName);
     setClickedCategory(newArray);
   };
-  const setPrefHandler = (clickedCategories) => {
-    console.log(clickedCategories);
+
+  const setPrefHandler = (categories) => {
+    const initial = false;
+    if (!categories) return;
+    console.log(categories);
+    dispatch(apiActions.clearNewsData());
+    clickedCategory.map((category) => {
+      dispatch(fetchNewsData(category, initial));
+    });
+    // for (const category of clickedCategory) {
+    //   dispatch(fetchNewsData(category));
+    // }
   };
 
   useEffect(() => {
@@ -61,17 +74,18 @@ const Personalization = (props) => {
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "left", vertical: "top" }}
     >
-      {clickedCategory.map((category) => (
-        <Chip
-          key={category}
-          label={category}
-          component="span"
-          onDelete={() => removeCategoryHandler(category)}
-          clickable
-          sx={{ m: 1 }}
-        ></Chip>
-      ))}
-
+      <Box sx={{ height: 50 }}>
+        {clickedCategory.map((category) => (
+          <Chip
+            key={category}
+            label={category}
+            component="span"
+            onDelete={() => removeCategoryHandler(category)}
+            clickable
+            sx={{ m: 1 }}
+          ></Chip>
+        ))}
+      </Box>
       <Divider />
       {newsCategories.map((category) => (
         <Chip
@@ -85,10 +99,19 @@ const Personalization = (props) => {
       ))}
 
       <Divider />
-      <Box sx={{ p: 1, display: "flex", justifyContent: "flex-end" }}>
+      <Box
+        sx={{
+          height: 50,
+          p: 1,
+          display: "flex",
+          justifyContent: "flex-end",
+          alignContent: "flex-end",
+        }}
+      >
         <Button
+          sx={{ height: 40 }}
           variant="contained"
-          onClick={() => setPrefHandler(clickedCategories)}
+          onClick={() => setPrefHandler(clickedCategory)}
         >
           Set preferences
         </Button>

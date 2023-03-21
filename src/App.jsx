@@ -19,7 +19,8 @@ function App() {
 
   useEffect(() => {
     const category = "music";
-    dispatch(fetchNewsData(category));
+    const initial = true;
+    dispatch(fetchNewsData(category, initial));
   }, [dispatch]);
 
   return (
