@@ -25,13 +25,13 @@ function App() {
 
   return (
     <Container>
-      {/* <Auth /> */}
+      <Auth />
       {isLoading && <Loading />}
-      <WebAppBar />
+      {/* <WebAppBar /> */}
       {/* <Weather /> */}
       {/* <Headline /> */}
-      <NewsCard />
-      <Footer />
+      {/* <NewsCard /> */}
+      {/* <Footer /> */}
     </Container>
   );
 }
