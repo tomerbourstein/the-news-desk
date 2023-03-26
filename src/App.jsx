@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchNewsData } from "./store/news-requests";
 
@@ -15,6 +15,9 @@ import "./App.css";
 
 function App() {
   const isLoading = useSelector((state) => state.ui.isLoading);
+  const newsVisible = useSelector((state) => state.ui.newsVisible);
+  const authVisible = useSelector((state) => state.ui.authVisible);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,13 +28,17 @@ function App() {
 
   return (
     <Container>
-      <Auth />
+      {authVisible && <Auth />}
       {isLoading && <Loading />}
-      {/* <WebAppBar /> */}
-      {/* <Weather /> */}
-      {/* <Headline /> */}
-      {/* <NewsCard /> */}
-      {/* <Footer /> */}
+      {newsVisible && (
+        <Fragment>
+          <WebAppBar />
+          {/* <Weather /> */}
+          {/* <Headline /> */}
+          <NewsCard />
+          <Footer />
+        </Fragment>
+      )}
     </Container>
   );
 }

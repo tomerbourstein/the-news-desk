@@ -51,6 +51,11 @@ const Login = (props) => {
 
     emailResetHandler("");
     passwordResetHandler("");
+    dispatch(uiActions.setLoadingState(true));
+
+    setTimeout(() => {
+      dispatch(uiActions.login());
+    }, 2000);
   };
 
   return (
