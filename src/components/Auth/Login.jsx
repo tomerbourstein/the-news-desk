@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
+import { signInHandler } from "../../utils/firebase";
+import useInput from "../../hooks/use-input";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -14,10 +16,41 @@ import Logo from "../../assets/logo.png";
 import classes from "./Auth.module.css";
 
 const Login = (props) => {
+  const {
+    value: enteredEmail,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    valueBlurHandler: emailBlurHandler,
+    reset: emailResetHandler,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredPassword,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    valueBlurHandler: passwordBlurHandler,
+    reset: passwordResetHandler,
+  } = useInput((value) => value.trim() !== "");
+
   const dispatch = useDispatch();
 
   const toggleAuthFormHandler = () => {
     dispatch(uiActions.toggleAuthForm());
+  };
+
+  let formIsValid = false;
+  if (emailIsValid && passwordIsValid) {
+    formIsValid = true;
+  }
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    signInHandler(enteredEmail, enteredPassword);
+
+    emailResetHandler("");
+    passwordResetHandler("");
   };
 
   return (
@@ -36,10 +69,14 @@ const Login = (props) => {
         Login
       </Typography>
 
-      <Box component="form" noValidate sx={{ mt: 3 }}>
+      <Box component="form" onSubmit={submitHandler} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
+              value={enteredEmail}
+              error={emailHasError}
+              onBlur={emailBlurHandler}
+              onChange={emailChangeHandler}
               autoFocus
               required
               fullWidth
@@ -51,6 +88,10 @@ const Login = (props) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              value={enteredPassword}
+              error={passwordHasError}
+              onBlur={passwordBlurHandler}
+              onChange={passwordChangeHandler}
               required
               fullWidth
               name="password"
@@ -65,6 +106,7 @@ const Login = (props) => {
           type="submit"
           fullWidth
           variant="contained"
+          disabled={!formIsValid}
           sx={{ mt: 3.5, mb: 2 }}
         >
           Login
