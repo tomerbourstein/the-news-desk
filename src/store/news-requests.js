@@ -61,7 +61,7 @@ export const fetchNewsData = (q, initial) => {
     };
     try {
       const newsData = await fetchData();
-      console.log(newsData);
+      // console.log(newsData);
       if (initial) {
         dispatch(apiActions.fetchNewsData(newsData));
       }

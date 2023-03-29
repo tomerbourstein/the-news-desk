@@ -3,7 +3,12 @@ import { chooseRandomItems } from "../utils/index";
 
 const apiSlice = createSlice({
   name: "api",
-  initialState: { newsData: [], weatherData: [], categories: [] },
+  initialState: {
+    newsData: [],
+    weatherData: [],
+    preferences: [],
+    categories: [],
+  },
   reducers: {
     fetchNewsData(state, action) {
       if (state.newsData.length === 0) {
@@ -28,6 +33,9 @@ const apiSlice = createSlice({
     updateCategories(state, action) {
       const newArr = state.categories.filter((e) => e.name != action.payload);
       state.categories = newArr;
+    },
+    updatePreferences(state, action) {
+      state.preferences = action.payload;
     },
   },
 });

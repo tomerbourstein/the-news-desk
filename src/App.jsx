@@ -19,14 +19,6 @@ function App() {
   const newsVisible = useSelector((state) => state.ui.newsVisible);
   const authVisible = useSelector((state) => state.ui.authVisible);
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const category = "music";
-    const initial = true;
-    dispatch(fetchNewsData(category, initial));
-  }, [dispatch]);
-
   return (
     <Container>
       {authVisible && <Auth />}

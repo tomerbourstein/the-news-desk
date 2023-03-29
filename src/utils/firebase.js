@@ -6,7 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { getDatabase, ref, set, get, child } from "firebase/database";
+import { getDatabase, ref, set, get, child, update } from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -62,10 +62,17 @@ export const signInHandler = (email, password) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log(user);
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
     });
+};
+
+export const writeDataHandler = (categories) => {
+  const userId = getUserId();
+  const db = getDatabase();
+  update(ref(db, "users/" + userId), {
+    preferences: categories,
+  });
 };

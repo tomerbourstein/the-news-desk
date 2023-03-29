@@ -5,21 +5,20 @@ import {
   fetchNewsCategoriesData,
   fetchNewsData,
 } from "../../store/news-requests";
+import { writeDataHandler } from "../../utils/firebase";
+
 import Popover from "@mui/material/Popover";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 
-const clickedCategories = ["Sports", "Music", "Cryptocurrency", "Fashion"];
-
 const Personalization = (props) => {
   const newsCategories = useSelector((state) => state.api.categories);
+  const preferences = useSelector((state) => state.api.preferences);
   const dispatch = useDispatch();
 
-  const [clickedCategory, setClickedCategory] = useState([
-    ...clickedCategories,
-  ]);
+  const [clickedCategory, setClickedCategory] = useState([]);
 
   const addCategoryHandler = (categoryName) => {
     if (clickedCategory.length >= 4) return;
@@ -34,21 +33,19 @@ const Personalization = (props) => {
   };
 
   const setPrefHandler = (categories) => {
-    const initial = false;
     if (!categories) return;
     console.log(categories);
     dispatch(apiActions.clearNewsData());
-    clickedCategory.map((category) => {
-      dispatch(fetchNewsData(category, initial));
-    });
-    // for (const category of clickedCategory) {
-    //   dispatch(fetchNewsData(category));
-    // }
+    writeDataHandler(categories);
   };
 
   useEffect(() => {
     dispatch(fetchNewsCategoriesData());
   }, [dispatch]);
+
+  useEffect(() => {
+    setClickedCategory(preferences);
+  }, [preferences]);
 
   return (
     <Popover
