@@ -19,8 +19,8 @@ const Headline = () => {
           rows={item.rows || 1}
         >
           <img
-            src={`${item.urlToImage}?w=248&h=192&fit=crop&auto=format`}
-            srcSet={`${item.urlToImage}?w=248&h=192&fit=crop&auto=format&dpr=2 2x`}
+            src={item.urlToImage}
+            srcSet={item.urlToImage}
             alt={item.title}
             loading="lazy"
           />

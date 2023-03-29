@@ -57,6 +57,7 @@ const WebAppBar = () => {
         console.error(error);
       });
   }, []);
+  
   return (
     <Fragment>
       <AppBar position="static" color="transparent" elevation={0}>

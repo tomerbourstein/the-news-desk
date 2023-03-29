@@ -12,6 +12,7 @@ import NewsCard from "./components/News/NewsCard";
 
 import Container from "@mui/material/Container";
 import "./App.css";
+import MainNews from "./components/News/MainNews";
 
 function App() {
   const isLoading = useSelector((state) => state.ui.isLoading);
@@ -34,8 +35,7 @@ function App() {
         <Fragment>
           <WebAppBar />
           {/* <Weather /> */}
-          {/* <Headline /> */}
-          <NewsCard />
+          <MainNews />
           <Footer />
         </Fragment>
       )}
