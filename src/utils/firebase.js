@@ -6,6 +6,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { getDatabase, ref, set, get, child } from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,6 +27,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth(app);
+const database = getDatabase(app);
+
+// Get authenticated user id.
+export const getUserId = () => {
+  return auth.currentUser.uid;
+};
 
 export const signUpHandler = (userData) => {
   const { enteredEmail, enteredPassword, enteredFirstName, enteredLastName } =
@@ -35,7 +42,13 @@ export const signUpHandler = (userData) => {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
-      console.log(userData);
+      const userId = user.uid;
+      const db = getDatabase();
+
+      set(ref(db, "users/" + userId), {
+        firstName: enteredFirstName,
+        lastName: enteredLastName,
+      });
     })
     .catch((error) => {
       const errorCode = error.code;
