@@ -1,3 +1,17 @@
+.mainMobile {
+  display: none;
+}
 .arrowIcon {
   transform: rotate(-90deg);
+  transition: transform 0.2s ease-in-out !important;
+}
+
+.arrowIcon:hover {
+  transform: rotate(0);
+}
+
+@media (max-width: 768px) {
+  .mainMobile {
+    display:inline !important;
+  }
 }

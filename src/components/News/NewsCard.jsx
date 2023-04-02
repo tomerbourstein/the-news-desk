@@ -28,7 +28,7 @@ const NewsCard = () => {
   // }, [newsData]);
 
   return (
-    <main>
+    <main className={classes.mainDesktop}>
       <ImageList variant="quilted" cols={4} gap={8} rowHeight={187}>
         <ImageListItem key="weather" cols={1} rows={1} width={282}>
           <Weather />

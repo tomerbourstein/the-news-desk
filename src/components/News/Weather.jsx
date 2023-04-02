@@ -4,10 +4,12 @@ import { fetchWeatherData } from "../../store/news-requests";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import classes from "./Weather.module.css";
+import { useState } from "react";
 
 const Weather = () => {
   const weatherData = useSelector((state) => state.api.weatherData);
   const dispatch = useDispatch();
+  const [dayAndTime, setDayAndTime] = useState("");
 
   function capitalizeWords(str) {
     if (!str) return;
@@ -37,6 +39,14 @@ const Weather = () => {
     });
   };
 
+  const getCurrentDayAndTime = () => {
+    const now = new Date();
+    const dayOfWeek = now.toLocaleDateString("en-US", { weekday: "long" });
+    const hours = now.getHours().toString().padStart(2, "0");
+    const minutes = now.getMinutes().toString().padStart(2, "0");
+    return `${dayOfWeek} ${hours}:${minutes}`;
+  };
+
   useEffect(() => {
     getUserLocation()
       .then((location) => {
@@ -45,6 +55,8 @@ const Weather = () => {
       .catch((error) => {
         console.error(error);
       });
+
+    setDayAndTime(getCurrentDayAndTime());
   }, []);
 
   return (
@@ -54,7 +66,7 @@ const Weather = () => {
 
         <Box>
           <Typography>{weatherData.location}</Typography>
-          <Typography>Tuesday 16:00</Typography>
+          <Typography>{dayAndTime}</Typography>
           <Typography>{capitalizeWords(weatherData.weather)}</Typography>
         </Box>
 

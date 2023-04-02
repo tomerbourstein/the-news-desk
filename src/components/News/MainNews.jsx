@@ -31,7 +31,7 @@ const MainNews = () => {
 
   return (
     <Fragment>
-      {/* <Headline /> */}
+      <Headline />
       <NewsCard />
     </Fragment>
   );
