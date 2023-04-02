@@ -18,6 +18,13 @@
   width: 75px;
 }
 
+.night {
+  background: url("../../assets/night-sky.png");
+}
+
+.day {
+  background: url("../../assets/day-sky.png");
+}
 @media (max-width: 768px) {
   .container {
     gap: 2rem !important;
