@@ -1,4 +1,7 @@
 import { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
+
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -9,11 +12,22 @@ import Personalization from "./Personalization";
 const AccountMenu = (props) => {
   const [anchorPersonal, setAnchorPersonal] = useState(null);
   const openPersonal = Boolean(anchorPersonal);
+  const dispatch = useDispatch();
+
   const handleClickPersonal = (event) => {
     setAnchorPersonal(event.currentTarget);
   };
+
   const handleClosePersonal = () => {
     setAnchorPersonal(null);
+  };
+
+  const handleClickLogout = () => {
+    dispatch(uiActions.setLoadingState(true));
+
+    setTimeout(() => {
+      dispatch(uiActions.logout());
+    }, 2000);
   };
 
   return (
@@ -23,7 +37,6 @@ const AccountMenu = (props) => {
         id="account-menu"
         open={props.open}
         onClose={props.handleClose}
-        // onClick={props.handleClose}
         PaperProps={{
           elevation: 0,
           sx: {
@@ -64,7 +77,7 @@ const AccountMenu = (props) => {
           </ListItemIcon>
           Selections
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleClickLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

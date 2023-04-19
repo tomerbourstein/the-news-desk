@@ -23,6 +23,10 @@ const uiSlice = createSlice({
       state.newsVisible = true;
       state.isLoading = false;
     },
+    logout(state) {
+      state.authVisible = true;
+      state.isLoading = false;
+    },
   },
 });
 

@@ -5,6 +5,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { getDatabase, ref, set, get, child, update } from "firebase/database";
 
@@ -66,6 +67,16 @@ export const signInHandler = (email, password) => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+    });
+};
+
+export const signOutHandler = () => {
+  signOut(auth)
+    .then(() => {
+      // Sign-out successful.
+    })
+    .catch((error) => {
+      // An error happened.
     });
 };
 
