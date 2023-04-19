@@ -32,6 +32,8 @@ const Headline = () => {
               subtitle={item.source.name}
               actionIcon={
                 <IconButton
+                  href={item.url}
+                  target="_blank"
                   sx={{ color: "#008037" }}
                   aria-label={`read more about ${item.title}`}
                 >

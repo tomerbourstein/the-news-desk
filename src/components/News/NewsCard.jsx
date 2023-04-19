@@ -23,9 +23,9 @@ const NewsCard = () => {
     };
   }
 
-  // useEffect(() => {
-  //   console.log(newsData);
-  // }, [newsData]);
+  useEffect(() => {
+    console.log(newsData);
+  }, [newsData]);
 
   return (
     <main className={classes.mainDesktop}>
@@ -60,6 +60,8 @@ const NewsCard = () => {
                 subtitle={item.source.name}
                 actionIcon={
                   <IconButton
+                    href={item.url}
+                    target="_blank"
                     sx={{ color: "#008037" }}
                     aria-label={`read more about ${item.title}`}
                   >
