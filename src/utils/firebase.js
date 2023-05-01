@@ -32,6 +32,7 @@ const database = getDatabase(app);
 
 // Get authenticated user id.
 export const getUserId = () => {
+  if (auth.currentUser === null) return;
   return auth.currentUser.uid;
 };
 
