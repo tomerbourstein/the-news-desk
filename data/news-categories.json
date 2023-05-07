@@ -1,0 +1,96 @@
+{
+  "categories": [
+    {
+      "name": "Politics",
+      "subcategories": ["Elections", "Policies", "Foreign policy"]
+    },
+    {
+      "name": "World News",
+      "subcategories": ["Conflict", "Disasters", "Humanitarian crises"]
+    },
+    {
+      "name": "Business & Finance",
+      "subcategories": ["Stock", "Company", "Cryptocurrency"]
+    },
+    {
+      "name": "Technology",
+      "subcategories": ["AI", "Cybersecurity", "Robotics"]
+    },
+    {
+      "name": "Science",
+      "subcategories": ["Astronomy", "Biology", "Genetics"]
+    },
+    {
+      "name": "Health & Medicine",
+      "subcategories": ["Outbreaks", "Breakthroughs", "Aging"]
+    },
+    {
+      "name": "Entertainment",
+      "subcategories": ["Film", "Television", "Streaming"]
+    },
+    {
+      "name": "Sports",
+      "subcategories": ["Football", "Basketball", "Esports"]
+    },
+    {
+      "name": "Weather",
+      "subcategories": ["Hurricane", "Tornadoes", "Climate patterns"]
+    },
+    {
+      "name": "Education",
+      "subcategories": ["K-12", "Higher", "Online degrees"]
+    },
+    {
+      "name": "Environment",
+      "subcategories": ["Climate", "Pollution", "Biodiversity"]
+    },
+    {
+      "name": "Crime & Justice",
+      "subcategories": ["Murder", "Brutality", "Cyberstalking"]
+    },
+    {
+      "name": "Immigration",
+      "subcategories": ["Border", "Asylum", "Migrant rights"]
+    },
+    {
+      "name": "Travel & Tourism",
+      "subcategories": ["Destinations", "Hospitality", "Adventure travel"]
+    },
+    {
+      "name": "Religion",
+      "subcategories": ["Interfaith", "Freedom", "Interfaith dialogue"]
+    },
+    {
+      "name": "Lifestyle",
+      "subcategories": ["Relationships", "Style", "Travel hacks"]
+    },
+    {
+      "name": "Arts & Culture",
+      "subcategories": ["Museums", "Literature", "Street art"]
+    },
+    {
+      "name": "Fashion",
+      "subcategories": ["Trends", "Luxury", "Sustainable clothing"]
+    },
+    {
+      "name": "Food & Drink",
+      "subcategories": ["Restaurants", "Recipes", "Craft cocktails"]
+    },
+    {
+      "name": "Real Estate",
+      "subcategories": ["Buying", "Selling", "Co-living spaces"]
+    },
+    {
+      "name": "Automotive",
+      "subcategories": ["New Cars", "Reviews", "Electric vehicles"]
+    },
+    {
+      "name": "Aviation",
+      "subcategories": ["Airline", "Safety", "Space travel"]
+    },
+    {
+      "name": "Energy & Resources",
+      "subcategories": ["Fossil Fuels", "Renewables", "Carbon emissions"]
+    }
+  ]
+}
