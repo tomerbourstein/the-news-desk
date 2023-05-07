@@ -2,3 +2,22 @@ li img,
 li div {
   border-radius: 5px !important;
 }
+
+.NA {
+  background-color: rgb(227, 227, 227);
+}
+
+.arrowIcon {
+  transform: rotate(-90deg);
+  transition: transform 0.2s ease-in-out !important;
+}
+
+.arrowIcon:hover {
+  transform: rotate(0);
+}
+
+@media (max-width: 768px) {
+  .mainDesktop {
+    display: none;
+  }
+}

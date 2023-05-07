@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
+import { signUpHandler } from "../../utils/firebase";
+import useInput from "../../hooks/use-input";
 
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -11,12 +13,75 @@ import Box from "@mui/material/Box";
 
 import Logo from "../../assets/logo.png";
 import classes from "./Auth.module.css";
-
 const Signup = (props) => {
   const dispatch = useDispatch();
 
+  const {
+    value: enteredFirstName,
+    isValid: firstNameIsValid,
+    hasError: firstNameHasError,
+    valueChangeHandler: firstNameChangeHandler,
+    valueBlurHandler: firstNameBlurHandler,
+    reset: firstNameResetHandler,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredLastName,
+    isValid: lastNameIsValid,
+    hasError: lastNameHasError,
+    valueChangeHandler: lastNameChangeHandler,
+    valueBlurHandler: lastNameBlurHandler,
+    reset: lastNameResetHandler,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredEmail,
+    isValid: emailIsValid,
+    hasError: emailHasError,
+    valueChangeHandler: emailChangeHandler,
+    valueBlurHandler: emailBlurHandler,
+    reset: emailResetHandler,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
+    value: enteredPassword,
+    isValid: passwordIsValid,
+    hasError: passwordHasError,
+    valueChangeHandler: passwordChangeHandler,
+    valueBlurHandler: passwordBlurHandler,
+    reset: passwordResetHandler,
+  } = useInput((value) => value.trim() !== "");
+
   const toggleAuthFormHandler = () => {
     dispatch(uiActions.toggleAuthForm());
+  };
+
+  let formIsValid = false;
+  if (firstNameIsValid && lastNameIsValid && emailIsValid && passwordIsValid) {
+    formIsValid = true;
+  }
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const userData = {
+      enteredEmail,
+      enteredPassword,
+      enteredFirstName,
+      enteredLastName,
+    };
+
+    signUpHandler(userData);
+    firstNameResetHandler("");
+    lastNameResetHandler("");
+    emailResetHandler("");
+    passwordResetHandler("");
+
+    dispatch(uiActions.setLoadingState(true));
+
+    setTimeout(() => {
+      dispatch(uiActions.login());
+    }, 2000);
   };
 
   return (
@@ -35,10 +100,14 @@ const Signup = (props) => {
         Sign up
       </Typography>
 
-      <Box component="form" noValidate sx={{ mt: 3 }}>
+      <Box component="form" onSubmit={submitHandler} sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
+              value={enteredFirstName}
+              error={firstNameHasError}
+              onBlur={firstNameBlurHandler}
+              onChange={firstNameChangeHandler}
               autoComplete="given-name"
               name="firstName"
               required
@@ -50,6 +119,10 @@ const Signup = (props) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              value={enteredLastName}
+              error={lastNameHasError}
+              onBlur={lastNameBlurHandler}
+              onChange={lastNameChangeHandler}
               required
               fullWidth
               id="lastName"
@@ -60,6 +133,10 @@ const Signup = (props) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              value={enteredEmail}
+              error={emailHasError}
+              onBlur={emailBlurHandler}
+              onChange={emailChangeHandler}
               required
               fullWidth
               id="email"
@@ -70,6 +147,10 @@ const Signup = (props) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              value={enteredPassword}
+              error={passwordHasError}
+              onBlur={passwordBlurHandler}
+              onChange={passwordChangeHandler}
               required
               fullWidth
               name="password"
@@ -84,6 +165,7 @@ const Signup = (props) => {
           type="submit"
           fullWidth
           variant="contained"
+          disabled={!formIsValid}
           sx={{ mt: 3, mb: 2 }}
         >
           Sign Up

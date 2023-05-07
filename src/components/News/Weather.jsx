@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchWeatherData } from "../../store/news-requests";
 import Box from "@mui/material/Box";
@@ -8,6 +8,12 @@ import classes from "./Weather.module.css";
 const Weather = () => {
   const weatherData = useSelector((state) => state.api.weatherData);
   const dispatch = useDispatch();
+  const [dayAndTime, setDayAndTime] = useState("");
+  let timeOfDay;
+  let weatherBg =
+    timeOfDay === "Evening" || timeOfDay === "Night"
+      ? classes.day
+      : classes.night;
 
   function capitalizeWords(str) {
     if (!str) return;
@@ -37,6 +43,28 @@ const Weather = () => {
     });
   };
 
+  const getCurrentDayAndTime = () => {
+    const now = new Date();
+    const dayOfWeek = now.toLocaleDateString("en-US", { weekday: "long" });
+    // const hours = now.getHours().toString().padStart(2, "0");
+    // const minutes = now.getMinutes().toString().padStart(2, "0");
+
+    const hour = now.getHours();
+
+    if (hour >= 5 && hour < 12) {
+      timeOfDay = "Morning";
+    } else if (hour === 12) {
+      timeOfDay = "Noon";
+    } else if (hour > 12 && hour < 18) {
+      timeOfDay = "Afternoon";
+    } else if (hour >= 18 && hour < 22) {
+      timeOfDay = "Evening";
+    } else {
+      timeOfDay = "Night";
+    }
+    return `${dayOfWeek} ${timeOfDay}`;
+  };
+
   useEffect(() => {
     getUserLocation()
       .then((location) => {
@@ -45,16 +73,18 @@ const Weather = () => {
       .catch((error) => {
         console.error(error);
       });
+
+    setDayAndTime(getCurrentDayAndTime());
   }, []);
 
   return (
-    <Box className={classes.weatherComponent}>
+    <Box className={`${classes.weatherComponent} ${weatherBg}`}>
       <Box className={classes.container}>
         <img src={weatherData.imgURL} />
 
         <Box>
           <Typography>{weatherData.location}</Typography>
-          <Typography>Tuesday 16:00</Typography>
+          <Typography>{dayAndTime}</Typography>
           <Typography>{capitalizeWords(weatherData.weather)}</Typography>
         </Box>
 

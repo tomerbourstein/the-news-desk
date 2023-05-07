@@ -5,3 +5,8 @@ export function showPosition(position) {
   console.log("Latitude: " + lat + " Longitude: " + lon);
   return { lat, lon };
 }
+
+export function chooseRandomItems(array, quantity) {
+  const shuffledArray = array.sort(() => Math.random() - 0.5);
+  return shuffledArray.slice(0, quantity);
+}

@@ -1,0 +1,12 @@
+.preferredTopics::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.preferredTopics::-webkit-scrollbar-track {
+  background-color: rgb(230, 227, 227);
+}
+
+.preferredTopics::-webkit-scrollbar-thumb {
+  background-color: rgb(186, 178, 178);
+}
