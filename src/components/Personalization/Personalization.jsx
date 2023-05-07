@@ -13,6 +13,8 @@ import Divider from "@mui/material/Divider";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
 
+import classes from "./Personalization.module.css";
+
 const Personalization = (props) => {
   const newsCategories = useSelector((state) => state.api.categories);
   const preferences = useSelector((state) => state.api.preferences);
@@ -61,17 +63,24 @@ const Personalization = (props) => {
           overflow: "visible",
           filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
           ml: -0.2,
-          mt: -1,
+          mt: { md: -1, xs: 13.2 },
           width: "100%",
-          maxWidth: 500,
-          maxHeight: 300,
-          height: 300,
+          maxWidth: { md: 500, xs: 400 },
+          maxHeight: 320,
         },
       }}
       transformOrigin={{ horizontal: "right", vertical: "top" }}
       anchorOrigin={{ horizontal: "left", vertical: "top" }}
     >
-      <Box sx={{ height: 50 }}>
+      <Box
+        className={classes.preferredTopics}
+        sx={{
+          height: { md: 65, xs: 46 },
+          whiteSpace: "nowrap",
+          overflowX: "auto",
+          scrollbarWidth: 1,
+        }}
+      >
         {clickedCategory.map((category) => (
           <Chip
             key={category}
@@ -79,7 +88,7 @@ const Personalization = (props) => {
             component="span"
             onDelete={() => removeCategoryHandler(category)}
             clickable
-            sx={{ m: 1 }}
+            sx={{ m: { md: 1, xs: 0.5 }, fontSize: { md: 13, xs: 10 } }}
           ></Chip>
         ))}
       </Box>
@@ -91,14 +100,14 @@ const Personalization = (props) => {
           component="span"
           clickable
           onClick={() => addCategoryHandler(category.name)}
-          sx={{ m: 1 }}
+          sx={{ m: { md: 1, xs: 0.5 }, fontSize: { md: 13, xs: 10 } }}
         ></Chip>
       ))}
 
       <Divider />
       <Box
         sx={{
-          height: 50,
+          height: "100%",
           p: 1,
           display: "flex",
           justifyContent: "flex-end",
