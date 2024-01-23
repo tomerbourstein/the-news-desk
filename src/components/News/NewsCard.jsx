@@ -13,20 +13,6 @@ import classes from "./NewsCard.module.css";
 const NewsCard = () => {
   const newsData = useSelector((state) => state.api.newsData);
 
-  function srcset(image, size, rows = 1, cols = 1) {
-    return {
-      src: { image },
-      // `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-      // srcSet: `${image}?w=${size * cols}&h=${
-      //   size * rows
-      // }&fit=crop&auto=format&dpr=2 2x`,
-    };
-  }
-
-  useEffect(() => {
-    console.log(newsData);
-  }, [newsData]);
-
   return (
     <main className={classes.mainDesktop}>
       <ImageList variant="quilted" cols={4} gap={8} rowHeight={187}>
