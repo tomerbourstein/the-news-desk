@@ -197,10 +197,22 @@ export const fetchNewsData = (q, initial) => {
         console.log(error);
         console.log("THIS IS MOCK DATA");
         let newsData = MOCK_DATA;
+        if (initial) {
+          dispatch(apiActions.fetchNewsData(newsData));
+        }
+        if (!initial) {
+          dispatch(apiActions.fetchNewsWithNewPreferences(newsData));
+        }
       }
     } else {
       console.log("THIS IS MOCK DATA");
-        let newsData = MOCK_DATA;
+      let newsData = MOCK_DATA;
+      if (initial) {
+        dispatch(apiActions.fetchNewsData(newsData));
+      }
+      if (!initial) {
+        dispatch(apiActions.fetchNewsWithNewPreferences(newsData));
+      }
     }
   };
 };
