@@ -15,9 +15,9 @@ const Headline = () => {
     <main className={classes.mainMobile}>
       <Weather />
       <ImageList cols={1} gap={20} rowHeight="auto">
-        {newsData.map((item) => (
+        {newsData.map((item, index) => (
           <ImageListItem
-            key={item.urlToImage}
+            key={index}
             cols={item.cols || 1}
             rows={item.rows || 1}
           >
