@@ -224,7 +224,7 @@ export const fetchNewsCategoriesData = () => {
       const isDevelopment = process.env.NODE_ENV === "development";
       const baseUrl = isDevelopment
         ? "/data/news-categories.json"
-        : "/production/path/to/news-categories.json";
+        : "/the-news-desk/data/news-categories.json";
       const response = await fetch(baseUrl);
       const data = await response.json();
       if (!response.ok) {
