@@ -1,10 +1,6 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-
 import { apiActions } from "./api-slice";
 import NA from "../assets/not-available.jpg";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 const weatherAPI = "a1de8b9cad7a634536975361a087ac97";
 const newsAPI = "ecd3c224f6434c6b81fa5efd08585869";
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -225,7 +221,11 @@ export const fetchNewsData = (q, initial) => {
 export const fetchNewsCategoriesData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch(`${__dirname}/data/news-categories.json`);
+      const isDevelopment = process.env.NODE_ENV === "development";
+      const baseUrl = isDevelopment
+        ? "/data/news-categories.json"
+        : "/production/path/to/news-categories.json";
+      const response = await fetch(baseUrl);
       const data = await response.json();
       if (!response.ok) {
         throw new Error("No categories to show.");
